@@ -98,11 +98,11 @@ const sortedCommunity = community.sort((a, b) => a.data.order - b.data.order);
           <!-- Filter Component with Time Filter -->
           <EventFilter sectionId="all" showTimeFilter={true} />
           
-          <!-- All Events Grid -->
-          <div id="events-grid-all" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <!-- All Events Masonry Layout -->
+          <div id="events-grid-all" class="mb-12">
             {upcomingEvents.map((event) => (
               <div 
-                class="event-card"
+                class="event-card masonry-item w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] mb-8"
                 data-title={event.data.title}
                 data-topic={event.data.topic}
                 data-location={event.data.location}
@@ -114,7 +114,7 @@ const sortedCommunity = community.sort((a, b) => a.data.order - b.data.order);
             ))}
             {pastEvents.map((event) => (
               <div 
-                class="event-card opacity-90"
+                class="event-card masonry-item w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] mb-8 opacity-90"
                 data-title={event.data.title}
                 data-topic={event.data.topic}
                 data-location={event.data.location}
@@ -264,3 +264,71 @@ const sortedCommunity = community.sort((a, b) => a.data.order - b.data.order);
 
   <Footer />
 </Layout>
+
+<script>
+  // @ts-ignore - Masonry is loaded from CDN
+  declare const Masonry: any;
+
+  // Initialize Masonry layout
+  let masonryInstance: any = null;
+
+  function initMasonry() {
+    const grid = document.getElementById('events-grid-all');
+    if (!grid || typeof Masonry === 'undefined') return;
+
+    // Destroy existing instance if any
+    if (masonryInstance) {
+      masonryInstance.destroy();
+    }
+
+    // @ts-ignore - Masonry is loaded from CDN
+    masonryInstance = new Masonry(grid, {
+      itemSelector: '.masonry-item',
+      columnWidth: '.masonry-item',
+      percentPosition: true,
+      gutter: 32, // 2rem (8 * 4 = 32px in Tailwind)
+      horizontalOrder: false,
+      transitionDuration: '0.3s'
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initMasonry, 100);
+    });
+  } else {
+    setTimeout(initMasonry, 100);
+  }
+
+  // Re-initialize after filter changes
+  const filterObserver = new MutationObserver(() => {
+    if (masonryInstance) {
+      setTimeout(() => {
+        masonryInstance.layout();
+      }, 100);
+    }
+  });
+
+  // Observe the grid for changes (when filter is applied)
+  const grid = document.getElementById('events-grid-all');
+  if (grid) {
+    filterObserver.observe(grid, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class', 'style']
+    });
+  }
+
+  // Re-layout on window resize
+  let resizeTimer: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      if (masonryInstance) {
+        masonryInstance.layout();
+      }
+    }, 250);
+  });
+</script>
