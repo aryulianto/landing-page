@@ -1,0 +1,25 @@
+category: "Conferences"
+order: 3
+questions:
+  - question: "What conference is organized by Kubernetes Cloud Native Indonesia?"
+    answer: |
+      Kubernetes Community Days Indonesia (KCD) is our flagship conference event focused on Kubernetes 
+      and cloud native technologies.
+
+      These conference typically feature
+
+      - Multiple tracks and sessions
+      - Keynote speakers from industry leaders
+      - Hands-on workshops and tutorials
+      - Networking opportunities
+      - Sponsor booths and exhibitions
+
+      These events are designed to provide in-depth knowledge, hands-on experience, and industry insights 
+      to attendees ranging from beginners to advanced practitioners.
+    order: 1
+  - question: "When is the next conference?"
+    answer: |
+      We organize annual conferences that bring together the Indonesian cloud native community. 
+      
+      The next conference is scheduled for 2026. Stay tuned for more details!
+    order: 2
