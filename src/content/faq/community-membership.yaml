@@ -1,0 +1,38 @@
+category: "Community & Membership"
+order: 1
+questions:
+  - question: "Does Kubernetes Cloud Native Indonesia have a basecamp?"
+    answer: |
+      No, our committee come from various cities in Indonesia. However, we usually hold regular meetings both online and offline.
+    order: 1
+
+  - question: "How to become a member of Kubernetes Cloud Native Indonesia?"
+    answer: |
+      Becoming a member is easy and free! You can [join our community](/#community) by:
+      
+      - Joining our Telegram group for discussions and updates
+      - Following our social media channels (LinkedIn, Twitter, Instagram, Facebook)
+      - Subscribing to our YouTube channel for event recordings and tutorials
+      - Attending our meetups, webinars, and conferences
+      
+      There are no formal membership requirements. Anyone interested in Kubernetes and cloud native technologies is welcome!
+    order: 2
+
+  - question: "Are the organizers of Kubernetes Cloud Native Indonesia committee paid?"
+    answer: |
+      No, all organizers and volunteers are contributing their time and effort on a voluntary basis. 
+      Our work is driven by our commitment to help others learn and grow in the cloud native ecosystem.
+    order: 3
+
+  - question: "How to become an organizer of Kubernetes Cloud Native Indonesia?"
+    answer: |
+      We're always looking for passionate individuals to help organize and grow our community! 
+      To become an organizer, you should:
+      
+      - Be an active member of the community
+      - Be willing to commit time to organize events and activities
+      - Be passionate about helping others learn and grow
+
+      If you're interested, please reach out to us via email at [organizers@cloudnative.id](mailto:organizers@cloudnative.id) 
+      or contact any of our current organizers on our community channels.
+    order: 4

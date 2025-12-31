@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const faqCategories = await getCollection('faq');
+const sortedCategories = faqCategories.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="FAQ - Kubernetes Cloud Native Indonesia">
+  <Navbar />
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Frequently Asked Questions
+        </h1>
+        <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          Find answers to common questions about our community
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Content -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      {sortedCategories.map((category) => {
+        const sortedQuestions = category.data.questions.sort((a, b) => a.order - b.order);
+        
+        return (
+          <div class="mb-12 last:mb-0">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              {/* Category Header */}
+              <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-white">
+                  {category.data.category}
+                </h2>
+              </div>
+              
+              {/* Questions */}
+              <div class="divide-y divide-gray-200">
+                {sortedQuestions.map((item, index) => (
+                  <div class="faq-item">
+                    <button 
+                      class="faq-question w-full text-left px-8 py-6 hover:bg-blue-50 transition-colors duration-200 group"
+                      aria-expanded="false"
+                    >
+                      <div class="flex justify-between items-start gap-6">
+                        <div class="flex-1">
+                          <div class="flex items-start gap-4">
+                            <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-sm mt-1">
+                              {index + 1}
+                            </span>
+                            <h3 class="text-lg md:text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors pr-4">
+                              {item.question}
+                            </h3>
+                          </div>
+                        </div>
+                        <svg class="faq-icon w-6 h-6 text-blue-600 flex-shrink-0 transition-transform duration-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </div>
+                    </button>
+                    <div class="faq-answer hidden px-8 pb-6">
+                      <div class="ml-12 text-gray-700 leading-relaxed space-y-3 text-base md:text-lg prose prose-blue max-w-none">
+                        <div set:html={
+                          item.answer
+                            // Convert markdown links [text](url) to HTML
+                            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 hover:underline font-medium">$1</a>')
+                            // Convert bold **text** to <strong>
+                            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                            // Split into blocks (separated by double newlines)
+                            .split('\n\n')
+                            .map(block => {
+                              // Check if block contains list items
+                              if (block.trim().startsWith('- ')) {
+                                const items = block.split('\n')
+                                  .filter(line => line.trim())
+                                  .map(line => line.replace(/^[\s]*-[\s]*/, ''))
+                                  .map(item => `<li>${item}</li>`)
+                                  .join('\n');
+                                return `<ul class="list-disc pl-6 space-y-2 my-4">\n${items}\n</ul>`;
+                              }
+                              // Regular paragraph - preserve single line breaks as <br>
+                              const content = block.trim().replace(/\n/g, '<br />');
+                              return content ? `<p>${content}</p>` : '';
+                            })
+                            .filter(p => p)
+                            .join('\n')
+                        } />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Still Have Questions Section */}
+      <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-xl p-8 md:p-12 text-center text-white mt-12">
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Still Have Questions?
+          </h2>
+          <p class="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
+            Please do not hesitate to contact us if you have any questions or need clarification. 
+            We're here to help and would love to hear from you!
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href="mailto:organizers@cloudnative.id" 
+              class="inline-flex items-center gap-3 bg-white text-blue-600 px-8 py-4 rounded-lg hover:bg-blue-50 transition-all font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Email Us
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+
+  <style>
+    .faq-question[aria-expanded="true"] .faq-icon {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prose :is(ul, ol) {
+      padding-left: 1.5rem;
+    }
+    
+    .prose li {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .prose strong {
+      color: #1e40af;
+      font-weight: 600;
+    }
+
+    .prose a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .prose a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <script>
+    // FAQ accordion functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const isExpanded = question.getAttribute('aria-expanded') === 'true';
+          const answer = question.nextElementSibling;
+          
+          // Toggle current question
+          question.setAttribute('aria-expanded', String(!isExpanded));
+          answer?.classList.toggle('hidden');
+        });
+      });
+    });
+  </script>
+</Layout>

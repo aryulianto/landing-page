@@ -1,0 +1,57 @@
+category: "Regular Meetup"
+order: 2
+questions:
+  - question: "When and where are regular meetups held?"
+    answer: |
+      We organize regular meetups throughout the year, typically every 2-3 months. The location varies 
+      depending on venue availability and sponsors. We host both:
+      
+      - **In-person meetups:** Usually held in Jakarta and other major cities in Indonesia
+      - **Online meetups/webinars:** Accessible to everyone across Indonesia and beyond
+      
+      Stay updated on our upcoming events by following our social media channels and checking the Events section 
+      on our website. We announce new events at least 2-3 weeks in advance.
+    order: 1
+
+  - question: "Are regular meetups paid events?"
+    answer: |
+      No, all our regular meetups and webinars are completely **FREE** to attend! We believe in making cloud native knowledge accessible to everyone. However, for some in-person events, registration is required to help us manage capacity and prepare accordingly. Make sure to register early as spots may be limited!
+    order: 2
+
+  - question: "How to be a speaker at a regular meetup event?"
+    answer: |
+      We're always looking for speakers to share their knowledge and experience with the community! 
+      To become a speaker:
+      
+      - Prepare a topic related to cloud native technologies or related subjects.
+      - We welcome both experienced and first-time speakers.
+      - Topics can range from beginner-friendly introductions to advanced technical deep-dives.
+      - Case studies, real-world implementations, and hands-on demonstrations are especially valuable to our community!
+
+      Kindly to submit your speaker proposal [here](https://docs.google.com/forms/d/e/1FAIpQLSfTM99QfPH4avvfu5Tkew3EyP1fouj_rQIrkRJPgvP4dZ9_dA/viewform?usp=sf_link). We will review your proposal and get back to you as soon as possible.
+    order: 3
+  - question: "As a company, can we partner to host regular meetups?"
+    answer: |
+      Absolutely! We welcome partnerships from companies interested in hosting or sponsoring our regular meetups. Partnering with us provides an excellent opportunity to showcase your commitment to the cloud native ecosystem and engage with a passionate community of developers and IT professionals.
+
+      As a partner, you can help by:
+      
+      - Providing a venue for the meetup
+      - Offering technical expertise or speakers
+      - Supporting event logistics and promotion
+      - Providing refreshments or swag for attendees
+
+      If your company is interested in partnering with us for a regular meetup, please reach out to us at [organizers@cloudnative.id](mailto:organizers@cloudnative.id).
+    order: 4
+  - question: "What is the typical format of a regular meetup?"
+    answer: |
+      Our regular meetups typically follow this format:
+      
+      - **Welcome & Introduction (5-10 minutes):** Brief introduction to the event, agenda, and speakers.
+      - **Keynote/Technical Talks (30-45 minutes each):** One or more presentations by speakers on various cloud native topics.
+      - **Q&A Sessions (10-15 minutes):** Opportunity for attendees to ask questions and engage with the speakers.
+      - **Networking & Socializing (15-30 minutes):** Time for attendees to connect, share experiences, and discuss topics informally.
+
+      Depending on the event, we may also include panel discussions, or hands-on workshops. The format may vary slightly based on the venue and the number of speakers.
+    order: 5
+  

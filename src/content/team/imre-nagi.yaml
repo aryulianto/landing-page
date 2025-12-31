@@ -1,6 +1,7 @@
 name: "Imre Nagi"
-role: "Co-Organizer"
+role: ""
 bio: "Lead Software Engineer @ Goto Financial"
 avatar: "/teams/imre-nagi.webp"
 linkedin: "https://www.linkedin.com/in/imrenagi/"
-order: 10
+emeritus: true
+order: 2

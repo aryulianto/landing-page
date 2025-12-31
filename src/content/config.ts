@@ -30,6 +30,7 @@ const teamCollection = defineCollection({
     twitter: z.string().optional(),
     linkedin: z.string().optional(),
     website: z.string().url().optional(),
+    emeritus: z.boolean().default(false),
     order: z.number().default(999),
   }),
 });
@@ -57,9 +58,23 @@ const communityCollection = defineCollection({
   }),
 });
 
+const faqCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    category: z.string(),
+    order: z.number().default(999),
+    questions: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+      order: z.number().default(999),
+    })),
+  }),
+});
+
 export const collections = {
   events: eventsCollection,
   team: teamCollection,
   sponsors: sponsorsCollection,
   community: communityCollection,
+  faq: faqCollection,
 };
